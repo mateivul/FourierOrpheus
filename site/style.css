@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #c4ccd6;
+    font-family: system-ui, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 22px 48px;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.highlight {
+    color: #ec3750;
+}
+
+.sub {
+    font-size: 1.1rem;
+    color: #8492a6;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+.video {
+    overflow: hidden;
+    border: 1px solid #1e2738;
+    margin-bottom: 40px;
+}
+
+.video video {
+    width: 100%;
+    display: block;
+}
+
+p {
+    font-size: 1rem;
+    color: #8492a6;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.formula {
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.4rem;
+    color: #fff;
+    padding: 20px 24px;
+    margin: 24px 0 8px;
+    background: #110305;
+    border: 1px solid #3d1020;
+    border-radius: 3px;
+}
+
+.note {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #525868;
+}
+
+.btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 32px 0 44px;
+}
+
+.btns a {
+    text-decoration: none;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: #ec3750;
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: #d4304a;
+}
+
+.hackclub-link {
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    color: #1e2738;
+    border: 1px solid #1e2738;
+}
+
+.hackclub-link:hover {
+    border-color: #ec3750;
+    color: #ec3750;
+}
+
+footer {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid #1e2738;
+}
+
+footer p {
+    font-size: 0.85rem;
+    color: #4d5265;
+}
+footer a {
+    color: #ec3750;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 40px 15px;
+    }
+    h1 {
+        font-size: 2 rem;
+    }
+}
