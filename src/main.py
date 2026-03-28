@@ -135,6 +135,7 @@ class FourierOrpheus(ZoomedScene):
                 self.play(
                     FadeOut(circles), 
                     FadeOut(radius_lines),
+                    FadeOut(counter),
                     FadeOut(self.zoomed_display),
                     FadeOut(self.zoomed_camera.frame),
                     run_time=1.5
