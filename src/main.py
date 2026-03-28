@@ -29,26 +29,74 @@ class FourierOrpheus(Scene):
             )
             return np.concatenate([[0j], np.cumsum(contributions)])
         
-        n= 5
-        centers = get_centers(0, n)
+        n, duration = 5, 5
+        tracker = ValueTracker(0)
 
+        start_tip = get_centers(0, n)[-1]
+        pos = [np.array([start_tip.real, start_tip.imag, 0.0])]
+
+        circles = VGroup(*[
+            Circle(radius=max(float(amps[k]), 0.01))
+            .set_stroke(color=CIRCLE_COLORS[k % len(CIRCLE_COLORS)], width=1.5, opacity=0.6)
+            for k in range(n)
+        ])
+
+        radius_lines = VGroup()
         for k in range(n):
-            c = np.array([centers[k].real, centers[k].imag, 0.0])
-            nx = np.array([centers[k+1].real, centers[k+1].imag, 0.0])
+            radius_lines.add(Arrow(
+                ORIGIN, RIGHT * max(float(amps[k]), 0.01),
+                buff=0, color='#ffffff', stroke_width=1, stroke_opacity=0.35,
+                tip_length=0.12, max_tip_length_to_length_ratio = 0.4
+            ))
 
-            circle = Circle(radius=max(float(amps[k]), 0.01))
-            circle.set_stroke(
-                color=CIRCLE_COLORS[k%len(CIRCLE_COLORS)],
-                width=1.5, opacity=0.6
-            )
-            circle.move_to(c)
-            self.add(circle)
+        glow_trace = TracedPath(
+            lambda tp=pos: tp[0].copy(),
+            stroke_color="#ff8c37", stroke_width=6, stroke_opacity=0.3,
+        )
+        trace = TracedPath(
+            lambda tp=pos: tp[0].copy(),
+            stroke_color=RED, stroke_width=3, stroke_opacity=1,
+        )
 
-            if not np.allclose(c, nx):
-                arrow = Arrow(
-                    c, nx, 
-                    buff = 0, color="#ffffff",
-                    stroke_width=1, stroke_opacity = 0.35,
-                    tip_length= 0.12, max_tip_length_to_length_ratio =0.4,
-                )
-                self.add(arrow)
+        def update(mob, t=tracker, nc=n, tp=pos, cl=circles, rl=radius_lines):
+            centers = get_centers(t.get_value(), nc)
+            for j in range(nc):
+                c = np.array([centers[j].real, centers[j].imag, 0.0])
+                nx = np.array([centers[j+1].real, centers[j+1].imag, 0.0])
+                cl[j].move_to(c)
+                if not np.allclose(c, nx):
+                    rl[j].put_start_and_end_on(c, nx)
+            tip = centers[-1]
+            tp[0] = np.array([tip.real, tip.imag, 0.0])
+
+        circles.add_updater(update)
+        self.add(glow_trace, trace, circles, radius_lines)
+
+        self.play(
+            tracker.animate.set_value(2 * np.pi + 0.05),
+            run_time=duration,
+            rate_func=linear,
+        )
+        circles.clear_updaters()
+        trace.clear_updaters()
+        glow_trace.clear_updaters()
+        # for k in range(n):
+        #     c = np.array([centers[k].real, centers[k].imag, 0.0])
+        #     nx = np.array([centers[k+1].real, centers[k+1].imag, 0.0])
+
+        #     circle = Circle(radius=max(float(amps[k]), 0.01))
+        #     circle.set_stroke(
+        #         color=CIRCLE_COLORS[k%len(CIRCLE_COLORS)],
+        #         width=1.5, opacity=0.6
+        #     )
+        #     circle.move_to(c)
+        #     self.add(circle)
+
+        #     if not np.allclose(c, nx):
+        #         arrow = Arrow(
+        #             c, nx, 
+        #             buff = 0, color="#ffffff",
+        #             stroke_width=1, stroke_opacity = 0.35,
+        #             tip_length= 0.12, max_tip_length_to_length_ratio =0.4,
+        #         )
+        #         self.add(arrow)
