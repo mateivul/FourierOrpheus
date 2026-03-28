@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Fourier Orpheus</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>The Hack Club icon, drawn with <span class="highlight">80 spinning circles</span></h1>
+            <p class="sub">
+                With the fourier transform you can draw any shape with just a sum of rotating circles. My animation
+                starts with 5 circles, then 15, then 40 and then 80 with a special add-on!
+            </p>
+
+            <div class="video">
+                <video autoplay loop muted playsinline>
+                    <source src="video/FourierOrpheus.mp4" type="video/mp4" />
+                </video>
+            </div>
+
+            <div class="formula">f(t) = &Sigma; c<sub>n</sub> &middot; e<sub>2&pi;int</sub></div>
+            <p class="note">
+                Each term is one circle and c<sub>n</sub> sets its size and starting anglq, n controls how fast it
+                spins.
+            </p>
+
+            <div class="btns">
+                <a class="btn" href="https://github.com/mateivul/FourierOrpheus">View Source on GitHub</a>
+                <a class="hackclub-link" href="https://hackclub.com/">Hack Club</a>
+            </div>
+
+            <footer>
+                <p>
+                    Built with <a href="https://www.manim.community/">Manim</a>, for
+                    <a href="https://game.hackclub.com/"></a>Hack Club: The Game
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>
