@@ -1,0 +1,6 @@
+venv/
+__pychache__/
+*.pyc
+src/media/
+output/
+.DS_Store
