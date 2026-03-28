@@ -7,7 +7,8 @@ def coeffs(points, n_coeffs):
     dc = np.where(freqs == 0)[0]
     ac = np.where(freqs != 0)[0]
     order = np.argsort(-np.abs(coefficients[ac]))
-    ac = ac[order[:n_corffs - len(dc)]]
+    ac = ac[order[:n_coeffs - len(dc)]]
+    keep = np.concatenate([dc, ac])
 
     freqs = freqs[keep]
     coefficients = coefficients[keep]
